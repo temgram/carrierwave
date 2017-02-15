@@ -196,7 +196,7 @@ module CarrierWave
           end
           cmd.gravity gravity
           cmd.background "rgba(255,255,255,0.0)"
-          cmd.extent "#{width}x#{height}" if cols != width || rows != height
+          # cmd.extent "#{width}x#{height}" if cols != width || rows != height
           append_combine_options cmd, combine_options
         end
         img = yield(img) if block_given?
