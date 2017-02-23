@@ -177,7 +177,7 @@ module CarrierWave
     #
     # [MiniMagick::Image] additional manipulations to perform
     #
-    def resize_to_fill(width, height, gravity = 'Center', combine_options: {})
+    def resize_to_fill(width, height, gravity = 'Center', extent = true, combine_options: {})
       manipulate! do |img|
         cols, rows = img[:dimensions]
         img.combine_options do |cmd|
@@ -196,7 +196,7 @@ module CarrierWave
           end
           cmd.gravity gravity
           cmd.background "rgba(255,255,255,0.0)"
-          # cmd.extent "#{width}x#{height}" if cols != width || rows != height
+          cmd.extent "#{width}x#{height}" if extent && (cols != width || rows != height)
           append_combine_options cmd, combine_options
         end
         img = yield(img) if block_given?
